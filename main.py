@@ -20,8 +20,14 @@ class Calculator:
                 stats += i.amount
         return stats
 
+
     def get_week_stats(self):
-        pass
+        week_delta = dt.date.today() - dt.timedelta(days=7)
+        stats = 0
+        for i in self.records:
+            if i.date >= week_delta:
+                stats += i.amount
+        return stats
 
 
 class CaloriesCalculator(Calculator):
@@ -43,10 +49,9 @@ class Record:
 
 obj = CaloriesCalculator(100)
 
-obj.add_record(100, 'Тест1', '12.2.1999')
-obj.add_record(200, 'Тест2')
-obj.add_record(2300, 'Тест2')
+obj.add_record(500, 'Тест1', '18.11.2023')
+obj.add_record(500, 'Тест2', '19.11.2023')
+obj.add_record(100, 'Тест3', '20.11.2023')
 
+print(obj.get_week_stats())
 print(obj.get_today_stats())
-
-
