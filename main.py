@@ -30,13 +30,14 @@ class Calculator:
         return stats
 
 
-class CaloriesCalculator(Calculator):
-    def get_today_calories_remained(self, currency):
-        pass
-
-
 class CashCalculator(Calculator):
     def get_today_cash_remained(self, currency):
+        stats = self.get_today_stats()
+        return self.limit - stats
+
+
+class CaloriesCalculator(Calculator):
+    def get_today_calories_remained(self, currency):
         pass
 
 
@@ -47,11 +48,14 @@ class Record:
         self.comment = comment
 
 
-obj = CaloriesCalculator(100)
+obj = CashCalculator(1000)
 
 obj.add_record(500, 'Тест1', '18.11.2023')
 obj.add_record(500, 'Тест2', '19.11.2023')
-obj.add_record(100, 'Тест3', '20.11.2023')
+obj.add_record(100, 'Тест3', '27.11.2023')
 
 print(obj.get_week_stats())
 print(obj.get_today_stats())
+print()
+
+print(obj.get_today_cash_remained('rub'))
