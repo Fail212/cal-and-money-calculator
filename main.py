@@ -54,22 +54,26 @@ class CashCalculator(Calculator):
 
 
 class CaloriesCalculator(Calculator):
-    def get_today_calories_remained(self, currency):
-        pass
+    def get_today_calories_remained(self):
+        stats = self.get_today_stats()
+        balance_calories: float = self.limit - stats
+        if balance_calories < 0:
+            return 'Хватит есть!'
+
+        return f'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более {round(balance_calories)} кКал'
 
 
 
-
-obj = CashCalculator(1000)
+obj = CaloriesCalculator(1000)
 
 obj.add_record(500, 'Тест1', '18.11.2023')
 obj.add_record(500, 'Тест2', '19.11.2023')
-obj.add_record(1235.9, 'Тест3', '27.11.2023')
+obj.add_record(900, 'Тест3', '28.11.2023')
 
 
 
-print(obj.get_today_cash_remained('eur'))
-print(obj.get_today_cash_remained('usd'))
+print(obj.get_today_calories_remained())
+print(obj.get_today_calories_remained())
 
 
 
